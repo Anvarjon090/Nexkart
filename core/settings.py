@@ -37,6 +37,7 @@ AUTH_USER_MODEL = "accounts.User"
 # Application definition
 
 DJANGO_APPS = [
+    "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,8 +56,8 @@ LOCAL_APPS = [
 
 EXTERNAL_APPS = [
     'rest_framework',
-    'adminlte3',
-    'adminlte3_theme',
+    'rest_framework_simplejwt',
+    'drf_yasg',
 ]
 
 INSTALLED_APPS = LOCAL_APPS + EXTERNAL_APPS + DJANGO_APPS
@@ -97,12 +98,33 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '12345',
+        'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
     }
+}
+
+
+# REST Framework Settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT Authorization header. Example: Bearer <your_token>',
+        },
+    },
+    'USE_SESSION_AUTH': False,
 }
 
 
@@ -139,12 +161,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-
-STATICFILES_DIRS = [BASE_DIR / "static"]
-
-
-ADMINLTE3_THEME = 'skin-blue'
+ 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
@@ -158,3 +175,29 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Mening Admin Panelim",
+    "site_header": "Admin Panel",
+    "welcome_sign": "Xush kelibsiz!",
+    "copyright": "© 2025",
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "order_with_respect_to": ["auth", "myapp"],
+    "custom_links": {
+        "auth": [{
+            "name": "Github",
+            "url": "https://github.com",
+            "icon": "fab fa-github",
+            "permissions": ["auth.view_user"]
+        }]
+    },
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+}

@@ -7,5 +7,5 @@ urlpatterns = [
     path('read/<int:id>/', CategoryRetrieveAPIView.as_view(), name="category-retrieve"),
     path('create/', CategoryCreateAPIView.as_view(), name="category-create"),
     path('delete/<int:id>/', CategoryDeleteAPIView.as_view(), name="category-delete"),
-    path('update/<int:id>/', CategoryUpdateAPIView.as_view(), name="category-update"),  
+    path('update/<int:id>/', CategoryUpdateAPIView.as_view(), name="category-update"),
 ]

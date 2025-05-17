@@ -11,9 +11,9 @@ from rest_framework_simplejwt.views import (
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Nexkart API",
+      title="VooCommerce API",
       default_version='v1',
-      description="Nexkart platform API documentation",
+      description="VooCommerce platform API documentation",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="admin@@gmail.com"),
       license=openapi.License(name="BSD License"),
@@ -24,9 +24,14 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('products/', include('products.urls')),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('accounts/', include('accounts.urls')),
+    path('products/', include('products.api_endpoints.Product.urls')),
+    path('categories/', include('products.api_endpoints.Category.urls')),
+    path('brands/', include('products.api_endpoints.Brand.urls')),
+    path('color/', include('products.api_endpoints.Color.urls')),
+
     path('admin/', admin.site.urls),
     # Swagger and Redoc URLs
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

@@ -61,3 +61,11 @@ class Color(BaseModel):
 
     def __str__(self):
         return self.name
+    
+
+
+class CategoryList(BaseModel):
+    name = models.CharField(max_length=255, null=False, blank=False)
+    slug = models.SlugField(null=False, blank=False, unique=True)
+    category = models.ForeignKey('products.Category', on_delete=models.SET_NULL, null=True, blank=True)
+    is_active = models.BooleanField(default=True)

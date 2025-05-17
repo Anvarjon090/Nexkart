@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 from products.models import Product
-from products.api_endpoints.ProductList.serializers import ProductListSerializer
+from products.api_endpoints.Product.ProductList.serializers import ProductListSerializer
 
 
 class ProductListAPIView1(APIView):

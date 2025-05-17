@@ -69,3 +69,5 @@ class CategoryList(BaseModel):
     slug = models.SlugField(null=False, blank=False, unique=True)
     category = models.ForeignKey('products.Category', on_delete=models.SET_NULL, null=True, blank=True)
     is_active = models.BooleanField(default=True)
+
+

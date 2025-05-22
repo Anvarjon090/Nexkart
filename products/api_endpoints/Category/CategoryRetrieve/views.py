@@ -1,9 +1,9 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import UpdateAPIView
 
-from products.api_endpoints.Category.CategoryRetrieve.serializers import CategoryRetrieveSerializer
 from products.models import Category
+from products.api_endpoints.Category.CategoryUpdate.serializers import CategoryUpdateSerializer
 
-class CategoryRetrieveAPIView(ListAPIView):
+
+class CategoryUpdateAPIView(UpdateAPIView):
     queryset = Category.objects.all()
-    serializer_class = CategoryRetrieveSerializer   
-    permission_classes = []
+    serializer_class = CategoryUpdateSerializer

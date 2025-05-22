@@ -37,7 +37,6 @@ AUTH_USER_MODEL = "accounts.User"
 # Application definition
 
 DJANGO_APPS = [
-    "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,6 +57,7 @@ EXTERNAL_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'jazzmin',
 ]
 
 INSTALLED_APPS = LOCAL_APPS + EXTERNAL_APPS + DJANGO_APPS
@@ -111,6 +111,10 @@ DATABASES = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
     ),
 }
 
@@ -125,6 +129,7 @@ SWAGGER_SETTINGS = {
         },
     },
     'USE_SESSION_AUTH': False,
+    # 'PERSIST_AUTH': True
 }
 
 
@@ -161,9 +166,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
- 
+
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
@@ -175,29 +180,3 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-
-JAZZMIN_SETTINGS = {
-    "site_title": "Mening Admin Panelim",
-    "site_header": "Admin Panel",
-    "welcome_sign": "Xush kelibsiz!",
-    "copyright": "© 2025",
-    "show_sidebar": True,
-    "navigation_expanded": True,
-    "hide_apps": [],
-    "order_with_respect_to": ["auth", "myapp"],
-    "custom_links": {
-        "auth": [{
-            "name": "Github",
-            "url": "https://github.com",
-            "icon": "fab fa-github",
-            "permissions": ["auth.view_user"]
-        }]
-    },
-    "icons": {
-        "auth": "fas fa-users-cog",
-        "auth.user": "fas fa-user",
-        "auth.Group": "fas fa-users",
-    },
-}

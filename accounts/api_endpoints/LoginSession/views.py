@@ -1,4 +1,3 @@
-# views.py
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from rest_framework.views import APIView

@@ -5,5 +5,4 @@ from products.models import ProductVariant
 
 class ProductVariantRetrieveAPIView(ListAPIView):
     queryset = ProductVariant.objects.all()
-    serializer_class = CategoryRetrieveSerializer   
-    permission_classes = []
+    serializer_class = CategoryRetrieveSerializer 

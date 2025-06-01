@@ -41,3 +41,8 @@ class CartAdmin(admin.ModelAdmin):
     search_fields = ("user",)
 
     inlines = [CartItemInline]
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ("id", "cart", "product", "quantity")
+    list_display_links = ("id", "cart")

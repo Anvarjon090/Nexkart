@@ -1,9 +1,11 @@
 from rest_framework.generics import UpdateAPIView
+from rest_framework import permissions
 
-from products.api_endpoints.Category.CategoryUpdate.serializers import CategoryUpdateSerializer
 from products.models import Brand
+from products.api_endpoints.Brand.BrandCreate.serializers import BrandCreateSerializer
+
 
 class BrandUpdateAPIView(UpdateAPIView):
     queryset = Brand.objects.all()
-    serializer_class = CategoryUpdateSerializer
-    lookup_field = 'id'
+    serializer_class = BrandCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]

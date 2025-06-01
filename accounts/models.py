@@ -33,7 +33,7 @@ class Cart(BaseModel):
 
 
 class CartItem(BaseModel):
-    cart = models.ForeignKey(Cart, on_delete=models.RESTRICT, null=True, blank=True)
+    cart = models.ForeignKey(Cart, on_delete=models.RESTRICT, null=False, blank=False, related_name="cart_items")
     product = models.ForeignKey('products.ProductVariant', on_delete=models.RESTRICT, null=True, blank=True)
     quantity = models.IntegerField(null=False, blank=False)
 

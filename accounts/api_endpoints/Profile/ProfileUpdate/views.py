@@ -15,4 +15,3 @@ class ProfileUpdateAPIView(UpdateAPIView):
 
     def get_object(self):
         return User.objects.filter(id=self.request.user.id).first()
-        

@@ -12,6 +12,7 @@ from accounts.api_endpoints.Profile.PasswordReset.serializers import (
 from accounts.api_endpoints.Profile.PasswordReset.email_send import send_password_reset_email
 
 class PasswordResetRequestAPIView(APIView):
+    permission_classes = []
     @swagger_auto_schema(
         request_body=PasswordResetRequestSerializer,
     )
@@ -34,3 +35,4 @@ class PasswordResetConfirmAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({"detail": "Password has been reset successfully."}, status=200)
+        

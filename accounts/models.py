@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractUser
 
 from common.models import BaseModel
 from accounts.manager import UserManager
@@ -39,3 +40,4 @@ class CartItem(BaseModel):
 
     def __str__(self):
         return f"CartItem({self.id})"
+    

@@ -1,6 +1,8 @@
 asgiref==3.8.1
+certifi==2025.4.26
 Django==5.2.1
 django-adminlte3==0.1.6
+django-jazzmin @ git+https://github.com/farridav/django-jazzmin.git@d269874c96fe5ff6d231c3017cdd4650bc2f3105
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
 drf-yasg==1.21.10
@@ -15,3 +17,4 @@ PyYAML==6.0.2
 rest-framework-simplejwt==0.0.2
 sqlparse==0.5.3
 uritemplate==4.1.1
+whitenoise==6.9.0

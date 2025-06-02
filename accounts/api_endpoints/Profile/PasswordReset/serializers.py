@@ -20,8 +20,9 @@ class PasswordResetRequestSerializer(serializers.Serializer):
         return value
     
     def save(self):
+        email = self.validated_data['email']
         token = generate_password_reset_token(self.user)
-        self.context["send_email"](self.email, token)
+        self.context["send_email"](email, token)
 
 
 class PasswordResetConfirmSerializer(serializers.Serializer):

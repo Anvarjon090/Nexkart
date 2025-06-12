@@ -15,7 +15,10 @@ class HomeView(TemplateView):
 
         context['title'] = 'VooCommerce | Home'
         context['categories'] = categories
-        print(categories[1].image.url)
+        if len(categories) > 1 and categories[1].image:
+            print(categories[1].image.url)
+        else:
+            print("Category image not found or list too short")
         return context
     
 

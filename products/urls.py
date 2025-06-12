@@ -1,8 +1,9 @@
 from django.urls import path
 
 from products.api_endpoints import *
-from products.api_endpoints.Product.ProductRetrieve import *
-
+from products.api_endpoints.Product.ProductRetrieve.views import ProductRetrieveAPIView
+from products.api_endpoints.ReviewComment.ReviewCommentCreate.views import ReviewCreateAPIView
+from products.api_endpoints.ReviewComment.ReviewCommentDelete.views import ReviewDeleteAPIView
 
 
 urlpatterns = [
@@ -29,4 +30,7 @@ urlpatterns = [
     path('categories/<str:slug>/', CategoryRetrieveAPIView.as_view(), name="category-retrieve"),
     path('categories/<str:slug>/update/', CategoryUpdateAPIView.as_view(), name="category-update"),
     path('categories/<str:slug>/delete/', CategoryDeleteAPIView.as_view(), name="category-delete"),
+
+    path('reviews/create/', ReviewCreateAPIView.as_view(), name="review-create"),
+    path('reviews/delete/<int:id>/', ReviewDeleteAPIView.as_view(), name="review-delete")
 ]

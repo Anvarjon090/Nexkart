@@ -1,10 +1,10 @@
-from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
+from rest_framework import serializers
 
-from accounts.api_endpoints.Profile.PasswordReset.tokens import (
-    generate_password_reset_token, 
-    verify_password_reset_token
+from accounts.tokens import (
+    generate_email_confirm_token, 
+    verify_email_confirm_token
 )
 
 User = get_user_model()
@@ -20,9 +20,14 @@ class PasswordResetRequestSerializer(serializers.Serializer):
         return value
     
     def save(self):
-        email = self.validated_data['email']
-        token = generate_password_reset_token(self.user)
-        self.context["send_email"](email, token)
+        token = generate_email_confirm_token(self.user)
+        self.context["send_email"](
+            subject="Reset your password", 
+            intro_text="Click the link below to reset your password.", 
+            email=self.email, 
+            token=token, 
+            template="email/reset_password_email.html"
+        )
 
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
@@ -30,7 +35,7 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
     new_password = serializers.CharField(write_only=True)
 
     def validate(self, attrs):
-        user_id = verify_password_reset_token(attrs["token"])
+        user_id = verify_email_confirm_token(attrs["token"])
         if not user_id:
             raise serializers.ValidationError("Invalid or expired token.")
         self.user = User.objects.get(pk=user_id)

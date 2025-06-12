@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from common.models import BaseModel
 
@@ -62,3 +63,23 @@ class Color(BaseModel):
 
     def __str__(self):
         return self.name
+    
+
+class Review(BaseModel):
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name="reviews")
+    user = models.ForeignKey('accounts.User', on_delete=models.SET_NULL, null=True, blank=True, related_name="reviews")
+    rating = models.IntegerField(default=0, null=False, blank=False, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    review = models.CharField(max_length=100, null=False, blank=False)
+
+    def __str__(self):
+        return f"Review({self.id})"
+    
+
+class Comment(BaseModel):
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey('accounts.User', on_delete=models.SET_NULL, null=True, blank=True, related_name="comments")
+    text = models.TextField(max_length=500, null=False, blank=False)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name="children")
+
+    def __str__(self):
+        return f"Comment({self.id})"

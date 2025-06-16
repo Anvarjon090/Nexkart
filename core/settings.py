@@ -313,3 +313,7 @@ LOCALE_PATHS = [BASE_DIR / "locale"]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+# Celery Settings
+CELERY_BROKER_URL = 'redis://localhost:6379/0'

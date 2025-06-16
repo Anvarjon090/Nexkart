@@ -8,7 +8,8 @@ def common_context(request):
         cart_items = CartItem.objects.filter(cart=request.user.cart).annotate(
                 total_amount=models.F('quantity') * models.F('product__price')
             )
-        total_amount = sum(item.total_amount for item in cart_items)
+        # total_amount = sum(item.total_amount for item in cart_items)
+        total_amount = sum(item.total_amount or 0 for item in cart_items)
 
         cart_items_count = request.user.cart.cart_items.count()
         

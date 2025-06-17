@@ -65,11 +65,9 @@ class ShoppingCartView(TemplateView):
         cart_items = CartItem.objects.filter(cart=self.request.user.cart).annotate(
             total_amount=models.F('quantity') * models.F('product__price')
         )
-        total_amount = sum(item.total_amount for item in cart_items)
 
         context = super().get_context_data(**kwargs)
         context['cartitems'] = cart_items
-        context['total_amount'] = total_amount
 
         return context
 
@@ -79,13 +77,3 @@ class CheckoutView(TemplateView):
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(**kwargs)
-    
-
-class ProfileView(TemplateView):
-    template_name = 'profile.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'VooCommerce | Profile'
-        context['current_user'] = self.request.user
-        return context

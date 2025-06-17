@@ -15,5 +15,4 @@ urlpatterns = [
     path("blog/", BlogView.as_view(), name="blog"),
     path("blog/details/", BlogDetailView.as_view(), name="blog-details"),
     path("cart/", ShoppingCartView.as_view(), name="shopping-cart"),
-    path("profile/", ProfileView.as_view(), name="profile"),
 ]

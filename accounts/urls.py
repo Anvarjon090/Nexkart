@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 
 from accounts.api_endpoints import (
     SessionLoginAPIView,
@@ -20,6 +21,9 @@ template_urls = [
     path("template/register/", RegisterView.as_view(), name="register-template"),
     path("template/login/", LoginView.as_view(), name="login-template"),
     path("template/profile/", ProfileView.as_view(), name="profile-template"),
+    path('profile/', views.profile_view, name='profile'),
+    path('logout/', views.logout_view, name='logout'),
+    path('login/', views.login_view, name='login-session'),
     # path("template/reset-password/", PasswordResetView.as_view(), name="reset-password-template"),
 ]
 

@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -46,17 +47,18 @@
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <select name="language" onchange="this.form.submit()" style="border: none; background: transparent; color: white;">
+                        <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>🇬🇧 English</option>
+                        <option value="uz" {% if LANGUAGE_CODE == 'uz' %}selected{% endif %}>🇺🇿 O‘zbekcha</option>
+                        <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>🇷🇺 Русский</option>
+                    </select>
+                </form>
             </div>
             {% if not is_user_authenticated %}
             <div class="header__top__right__auth">
-                <a href="{% url "login-session" %}"><i class="fa fa-user"></i> Login</a>
+                <a href="{% url 'accounts:login-session' %}">Login</a>
             </div>
             <div class="header__top__right__auth">
                 <a href="register-session"><i class="fa fa-user"></i> Register</a>
@@ -117,17 +119,28 @@
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
-                                <img src="{% static "img/language.png" %}" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
+                                <form action="{% url 'set_language' %}" method="post">
+                                    {% csrf_token %}
+                                    <select name="language" onchange="this.form.submit()" style="border: none; background: transparent; color: white;">
+                                        <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>🇬🇧 English</option>
+                                        <option value="uz" {% if LANGUAGE_CODE == 'uz' %}selected{% endif %}>🇺🇿 O‘zbekcha</option>
+                                        <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>🇷🇺 Русский</option>
+                                    </select>
+                                </form>
                             </div>
+                            {% if request.user.is_authenticated %}
+                            <div class="header__top__right__auth">
+                                <a href="{% url 'accounts:profile' %}">
+                                    <img src="{{ request.user.profile.image.url|default:'/static/img/default-avatar.png' }}" width="24" style="border-radius: 50%; margin-right: 5px;">
+                                    {{ request.user.username }}
+                                </a>
+                                <a href="{% url 'accounts:logout' %}">Logout</a>
+                            </div>
+                        {% else %}
                             <div class="header__top__right__auth">
                                 <a href="{% url 'accounts:login-template' %}"><i class="fa fa-user"></i> Login</a>
                             </div>
+                        {% endif %}
                         </div>
                     </div>
                 </div>

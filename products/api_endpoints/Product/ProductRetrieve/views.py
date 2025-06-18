@@ -1,9 +1,10 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import RetrieveAPIView
 
-from products.api_endpoints.Category.CategoryRetrieve.serializers import CategoryRetrieveSerializer
+from products.api_endpoints.Product.ProductRetrieve.serializers import ProductRetrieveSerializer
 from products.models import Product
 
-class ProductRetrieveAPIView(ListAPIView):
+class ProductRetrieveAPIView(RetrieveAPIView):
     queryset = Product.objects.all()
-    serializer_class = CategoryRetrieveSerializer   
+    serializer_class = ProductRetrieveSerializer
     permission_classes = []
+    lookup_field = 'id'

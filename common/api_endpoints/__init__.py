@@ -1,2 +1,1 @@
-from .MediaFileDelete import *
-from .MediaFileUpload import *
+from .MediaFile import *

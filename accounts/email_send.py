@@ -1,6 +1,9 @@
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from celery import shared_task
 
+
+@shared_task
 
 def send_email(subject, intro_text, email, token, template, password=None):
     subject = subject

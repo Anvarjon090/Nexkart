@@ -9,6 +9,7 @@ from common.views import (
     BlogDetailsView, 
     ShopDetailsView, 
     ShopingCartView,
+    BlogPostView
 )
 
 app_name = "common"
@@ -22,4 +23,5 @@ urlpatterns = [
     path('blog-details/', BlogDetailsView.as_view(), name='blog_details'),
     path('shop-details/', ShopDetailsView.as_view(), name='shop_details'),
     path('shopping-cart/', ShopingCartView.as_view(), name='shopping_cart'),
+    path('blogposts/', BlogPostView.as_view(), name='blogposts'),
 ]

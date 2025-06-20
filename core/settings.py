@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from datetime import timedelta
+from decouple import config
 
 load_dotenv()
 
@@ -106,7 +107,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
+        # 'NAME': os.getenv('DB_NAME'),
+        'NAME': 'nexkart_test',
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
@@ -217,6 +219,7 @@ JAZZMIN_SETTINGS = {
     "copyright": "UIC Academy",
     "search_model": ["auth.User", "auth.Group"],
     "user_avatar": "avatar",
+    
 
     ############
     # Top Menu #
@@ -318,3 +321,8 @@ LOCALE_PATHS = [BASE_DIR / "locale"]
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+
+
+
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
+STRIPE_PUBLISHABLE_KEY = config("STRIPE_PUBLISHABLE_KEY")

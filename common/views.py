@@ -95,5 +95,12 @@ class ShopingCartView(TemplateView):
             context['total_amount'] = 0
 
         return context
+    
+class BlogPostView(TemplateView):
+    template_name = 'blog-post.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
+        context['title'] = 'eCommerce | Blog Post'
+        return context

@@ -1,4 +1,4 @@
-from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.base_user import BaseUserManager
 
 
 class UserManager(BaseUserManager):

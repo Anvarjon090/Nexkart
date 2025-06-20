@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
 from products.models import *
 
@@ -15,13 +16,21 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ("name", "brand", "category")
     list_editable = ("is_active",)
 
-    inlines = [ProductVariantInline]
+    fieldsets = (
+        (_("Main"), {
+            'fields': ("brand", "category", "is_active")
+        }),
+        (_("Uzbek"), {
+            'fields': ('name_uz', 'description_uz',)
+        }),
+        (_("English"), {
+            'fields': ('name_en', 'description_en')
+        }),
+        (_("Russian"), {
+            'fields': ('name_ru', 'description_ru')
+        }))
 
-@admin.register(ProductVariant)
-class ProductVariantAdmin(admin.ModelAdmin):
-    list_display = ("id", "product", "size", "color", "price")
-    list_display_links = ("id", "product")
-    search_fields = ("product", "size", "color")
+    inlines = [ProductVariantInline]
 
 
 @admin.register(Brand)
@@ -50,6 +59,13 @@ class ColorAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     list_display_links = ("id", "name")
     search_fields = ("name",)
+
+
+@admin.register(ProductVariant)
+class ProductVariantAdmin(admin.ModelAdmin):
+    list_display = ("id", "product", "size", "color", "price")
+    list_display_links = ("id", "product")
+    search_fields = ("product", "size", "color")
 
 
 @admin.register(Review)

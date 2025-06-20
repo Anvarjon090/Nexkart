@@ -29,7 +29,16 @@ class ProductVariant(BaseModel):
 
     def __str__(self):
         return f"{self.product.name} - {self.price}"
-    
+
+
+class Category(BaseModel):
+    name = models.CharField(max_length=255, null=False, blank=False)
+    slug = models.SlugField(null=False, blank=False, unique=True)
+    image = models.ImageField(upload_to="categories/", null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
 
 class Brand(BaseModel):
     name = models.CharField(max_length=255, null=False, blank=False)
@@ -38,16 +47,7 @@ class Brand(BaseModel):
 
     def __str__(self):
         return self.name
-    
 
-class Category(BaseModel):
-    name = models.CharField(max_length=255, null=False, blank=False)
-    slug = models.SlugField(null=False, blank=False, unique=True)
-    image = models.ImageField(upload_to='categories', null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-    
 
 class Size(BaseModel):
     name = models.CharField(max_length=255, null=False, blank=False)
@@ -63,7 +63,7 @@ class Color(BaseModel):
 
     def __str__(self):
         return self.name
-    
+
 
 class Review(BaseModel):
     product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name="reviews")

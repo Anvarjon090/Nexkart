@@ -6,4 +6,5 @@ from products.models import Category
 class CategoryUpdateAPIView(UpdateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryUpdateSerializer
-    lookup_field = 'id'
+    lookup_field = 'id'  # Use 'id' as the lookup field for the URL
+    

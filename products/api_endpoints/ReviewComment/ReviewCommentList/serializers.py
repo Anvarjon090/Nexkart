@@ -3,7 +3,7 @@ from rest_framework import serializers
 from products.models import Review, Comment, Product
 
 
-class ReviewCommentProductSerializer(serializers.ModelSerializer):
+class ProductForReviewCommentListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
@@ -13,7 +13,7 @@ class ReviewCommentProductSerializer(serializers.ModelSerializer):
 
 
 class UserReviewsListSerializer(serializers.ModelSerializer):
-    product = ReviewCommentProductSerializer()
+    product = ProductForReviewCommentListSerializer()
     
     class Meta:
         model = Review

@@ -6,10 +6,10 @@
 
 <div class="container">
     <h1>Profile</h1>
-    <p>{{current_user.email}}</p>
-    <p>{{current_user.phone_number}}</p>
-    <p>{{current_user.bio}}</p>
-    <img src="{% if current_user.avatar %}{{current_user.avatar.url}}{% endif %}" alt="User avatar">
+    <p>{{ request.user.email }}</p>
+    <p>{{ request.user.phone_number }}</p>
+    <p>{{ request.user.bio }}</p>
+    <img src="{% if request.user.avatar %}{{ request.user.avatar.url }}{% endif %}" alt="User avatar">
 </div>
 
 {% endblock content %}

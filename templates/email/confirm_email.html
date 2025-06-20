@@ -1,0 +1,13 @@
+<html>
+<body>
+    <p>Hello {{ email }},</p>
+    <p>Your application has been received successfully.</p>
+    <p>To proceed, please confirm your email address by clicking the link below:</p>
+    <p>
+        <a href="{{ frontend_url }}/confirm-application?token={{ token }}">
+            Confirm My Application
+        </a>
+    </p>
+    <p>If you did not submit an application, you can ignore this email.</p>
+</body>
+</html>

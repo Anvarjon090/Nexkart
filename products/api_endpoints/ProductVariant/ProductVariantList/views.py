@@ -1,10 +1,9 @@
 from rest_framework.generics import ListAPIView
 
+from products.api_endpoints.ProductVariant.ProductVariantList.serializers import ProductVariantListSerializer
 from products.models import ProductVariant
-
-from products.api_endpoints.Category.CategoryList.serializers import CategoryListSerializer
 
 class ProductVariantListAPIView(ListAPIView):
     queryset = ProductVariant.objects.all()
-    serializer_class = CategoryListSerializer
+    serializer_class = ProductVariantListSerializer
     permission_classes = []
